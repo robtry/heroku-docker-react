@@ -1,20 +1,16 @@
-import {
-	Routes,
-	Route,
-	Link
-} from 'react-router-dom';
 import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import { Box, Drawer, Toolbar, List, Typography, Divider, IconButton, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Drawer, Toolbar, List, Typography, Divider, IconButton } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Home as HomeIcon, Person as PersonIcon, Mail as MailIcon } from '@mui/icons-material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import HomePage from './pages/Home.page';
-import EmailPage from './pages/Email.page';
-import ProfilePage from './pages/Profile.page';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 240;
 
@@ -90,7 +86,7 @@ export default function PersistentDrawerLeft() {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">
-						A01025780
+						Persistent drawer
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -114,39 +110,20 @@ export default function PersistentDrawerLeft() {
 				</DrawerHeader>
 				<Divider />
 				<List>
-					<Link to='/'>
-						<ListItem button>
+					{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+						<ListItem button key={text}>
 							<ListItemIcon>
-								<HomeIcon />
+								{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
 							</ListItemIcon>
-							<ListItemText primary='Home' />
+							<ListItemText primary={text} />
 						</ListItem>
-					</Link>
-					<Link to='email'>
-						<ListItem button>
-							<ListItemIcon>
-								<MailIcon />
-							</ListItemIcon>
-							<ListItemText primary='Email' />
-						</ListItem>
-					</Link>
-					<Link to='profile'>
-						<ListItem button>
-							<ListItemIcon>
-								<PersonIcon />
-							</ListItemIcon>
-							<ListItemText primary='Profile' />
-						</ListItem>
-					</Link>
+					))}
 				</List>
 			</Drawer>
 			<Main open={open}>
 				<DrawerHeader />
-				<Routes>
-					< Route path="/" element={< HomePage />} />
-					< Route path="email" element={< EmailPage />} />
-					< Route path="profile" element={< ProfilePage />} />
-				</Routes >
+				<Typography paragraph></Typography>
+				<Typography paragraph></Typography>
 			</Main>
 		</Box>
 	);
